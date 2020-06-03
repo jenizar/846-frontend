@@ -1,5 +1,5 @@
 <template>
-  <Map :incidents="incidents" />
+  <Map />
 </template>
 
 <script>
@@ -21,15 +21,6 @@ export default {
      * and the user will be redirected accordingly.
      */
     return true
-  },
-  asyncData({ $axios }) {
-    return $axios
-      .get('https://846policebrutality.b-cdn.net/api/incidents')
-      .then((res) => {
-        return {
-          incidents: res.data.data
-        }
-      })
   }
 }
 </script>

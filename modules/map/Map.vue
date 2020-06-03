@@ -24,18 +24,20 @@
 </template>
 
 <script>
-import { locations } from './../../shared/locations'
+import { mapGetters } from 'vuex'
 import { dark as darkMapStyle } from './style'
 import { ClassNames as GlobalClassNames } from '~/shared/constants'
 
 export default {
   props: {
-    incidents: {
-      type: Array
-    },
     xclass: {
       type: String
     }
+  },
+  computed: {
+    ...mapGetters({
+      incidents: 'global/incidents'
+    })
   },
   data() {
     return {
@@ -61,8 +63,7 @@ export default {
           height: 56,
           textColor: '#fff'
         }
-      ],
-      locations
+      ]
     }
   },
   mounted() {},
