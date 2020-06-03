@@ -53,9 +53,9 @@ export default {
       clusterStyle: [
         {
           url:
-            'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m1.png',
-          width: 56,
-          height: 56,
+            'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m3.png',
+          width: 66,
+          height: 66,
           textColor: '#fff'
         }
       ]
