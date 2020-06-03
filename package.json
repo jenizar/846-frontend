@@ -21,6 +21,7 @@
     "nuxt": "^2.12.0",
     "nuxt-babel": "^1.0.1",
     "nuxt-gmaps": "^1.1.9",
+    "smarquee": "^1.0.5",
     "vue-geolocation-api": "^0.1.17"
   },
   "devDependencies": {
