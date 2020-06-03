@@ -13,6 +13,7 @@
         lat: location.geocoding.lat,
         lng: location.geocoding.long
       }"
+      :options="markerOptions"
     >
       <GMapInfoWindow>
         <code>
@@ -58,7 +59,11 @@ export default {
           height: 66,
           textColor: '#fff'
         }
-      ]
+      ],
+      markerOptions: {
+        icon:
+          'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m3.png'
+      }
     }
   },
   computed: {
