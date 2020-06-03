@@ -16,7 +16,10 @@ The backend repository can be found here: https://github.com/949mac/846-backend
 
 ## Build Setup
 
+Currently we are using Node `v12.16.1`. If you aren't doing that already, it might be best to use Node Version Manager (NVM, https://github.com/nvm-sh/nvm). If you are using nvm, simply type `nvm use` in the project root.
+
 ``` bash
+
 # install dependencies
 $ npm run install
 
