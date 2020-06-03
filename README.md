@@ -6,6 +6,9 @@ This repository contains the boilerplate for an extensive Nuxt Frontend SPA. Mak
 
 ↪ Create pull requests to `develop` after a feature or bugfix is completed — add an appropriate reviewer who will merge the PR after reviewing. `master` always contains the latest release which should be used in production and for creating new sites.
 
+### Backend Repository
+The backend repository can be found here: https://github.com/949mac/846-backend
+
 ## Linting and Code Styling
 * EditorConfig support for .editorconifg file
 * ESLint to lint JavaScript
