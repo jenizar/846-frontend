@@ -34,11 +34,6 @@ export default {
       type: String
     }
   },
-  computed: {
-    ...mapGetters({
-      incidents: 'global/incidents'
-    })
-  },
   data() {
     return {
       rootClassName: `${GlobalClassNames.PREFIX}-mMap`,
@@ -65,6 +60,11 @@ export default {
         }
       ]
     }
+  },
+  computed: {
+    ...mapGetters({
+      incidents: 'global/incidents'
+    })
   },
   mounted() {},
   methods: {}
