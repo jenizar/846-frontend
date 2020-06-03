@@ -41,7 +41,7 @@ export default {
       long: -98.5556199,
       zoom: 5,
       mapOptions: {
-        zoomControl: false,
+        zoomControl: true,
         mapTypeControl: false,
         scaleControl: false,
         streetViewControl: false,

@@ -1,6 +1,5 @@
 /* eslint-disable */
 export const dark = [
-  [
     {
       "elementType": "geometry",
       "stylers": [
@@ -186,4 +185,3 @@ export const dark = [
       ]
     }
   ]
-]
