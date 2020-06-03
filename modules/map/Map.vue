@@ -4,10 +4,12 @@
     :zoom="zoom"
     :center="{ lat: lat, lng: long }"
     :options="mapOptions"
+    :cluster="{ options: { styles: clusterStyle } }"
   ></GMap>
 </template>
 
 <script>
+import { dark as darkMapStyle } from './style'
 import { ClassNames as GlobalClassNames } from '~/shared/constants'
 
 export default {
@@ -32,11 +34,23 @@ export default {
         streetViewControl: false,
         rotateControl: false,
         fullscreenControl: false,
-        gestureHandling: 'none'
-      }
+        gestureHandling: 'none',
+        styles: darkMapStyle
+      },
+      clusterStyle: [
+        {
+          url:
+            'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m1.png',
+          width: 56,
+          height: 56,
+          textColor: '#fff'
+        }
+      ]
     }
   },
-  mounted() {},
+  mounted() {
+    console.log(this.mapOptions)
+  },
   methods: {}
 }
 </script>
@@ -44,6 +58,6 @@ export default {
 <style lang="scss">
 .GMap__Wrapper {
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - #{$header-height});
 }
 </style>
