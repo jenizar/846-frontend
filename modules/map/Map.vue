@@ -5,16 +5,32 @@
     :center="{ lat: lat, lng: long }"
     :options="mapOptions"
     :cluster="{ options: { styles: clusterStyle } }"
-  ></GMap>
+  >
+    <GMapMarker
+      v-for="location in incidents"
+      :key="location.id"
+      :position="{
+        lat: location.geocoding.lat,
+        lng: location.geocoding.long
+      }"
+    >
+      <GMapInfoWindow>
+        <code>
+          {{ location.title }}
+        </code>
+      </GMapInfoWindow>
+    </GMapMarker>
+  </GMap>
 </template>
 
 <script>
+import { locations } from './../../shared/locations'
 import { dark as darkMapStyle } from './style'
 import { ClassNames as GlobalClassNames } from '~/shared/constants'
 
 export default {
   props: {
-    items: {
+    incidents: {
       type: Array
     },
     xclass: {
@@ -45,12 +61,11 @@ export default {
           height: 56,
           textColor: '#fff'
         }
-      ]
+      ],
+      locations
     }
   },
-  mounted() {
-    console.log(this.mapOptions)
-  },
+  mounted() {},
   methods: {}
 }
 </script>

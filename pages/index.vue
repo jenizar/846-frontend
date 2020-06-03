@@ -1,5 +1,5 @@
 <template>
-  <Map />
+  <Map :incidents="incidents" />
 </template>
 
 <script>
@@ -9,7 +9,28 @@ export default {
   components: {
     Map
   },
-  data() {}
+  data() {
+    return {
+      locations: []
+    }
+  },
+  validate({ params }) {
+    /**
+     * Making sure that only matching brands are shown.
+     * If a URL contains a non-match, 404 will be thrown
+     * and the user will be redirected accordingly.
+     */
+    return true
+  },
+  asyncData({ $axios }) {
+    return $axios
+      .get('https://846policebrutality.b-cdn.net/api/incidents')
+      .then((res) => {
+        return {
+          incidents: res.data.data
+        }
+      })
+  }
 }
 </script>
 
