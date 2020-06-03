@@ -1,6 +1,6 @@
 <template>
   <header :class="[xclass, `${rootClassName}`]">
-    846 – Police Brutality Across the United States of America
+    846 – Police Incidents Across the United States of America
   </header>
 </template>
 
