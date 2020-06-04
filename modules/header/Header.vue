@@ -1,10 +1,15 @@
 <template>
   <header :class="[xclass, `${rootClassName}`]">
-    846 – Police Incidents Across the United States of America
+    Currently reporting
+    <span :class="`${rootClassName}-highlight`">
+      {{ incidents.length }}
+    </span>
+    Police Incidents Across the United States of America.
   </header>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { ClassNames as GlobalClassNames } from '~/shared/constants'
 
 export default {
@@ -17,6 +22,11 @@ export default {
     return {
       rootClassName: `${GlobalClassNames.PREFIX}-mHeader`
     }
+  },
+  computed: {
+    ...mapGetters({
+      incidents: 'global/incidents'
+    })
   }
 }
 </script>
@@ -32,5 +42,13 @@ export default {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   background-color: $pb-black;
+
+  &-highlight {
+    margin-right: 0.5rem;
+    margin-bottom: 0.125rem;
+    margin-left: 0.5rem;
+    font-size: 1.5rem;
+    color: $pb-red;
+  }
 }
 </style>
