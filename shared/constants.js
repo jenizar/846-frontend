@@ -7,5 +7,6 @@ export const ClassNames = {
 }
 
 export const Endpoints = {
-  INCIDENTS: 'https://846policebrutality.b-cdn.net/api/incidents'
+  INCIDENTS: 'https://api.846policebrutality.com/api/incidents',
+  // INCIDENTS: 'https://846policebrutality.b-cdn.net/api/incidents'
 }

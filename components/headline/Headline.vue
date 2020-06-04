@@ -1,9 +1,8 @@
 <template>
   <div :class="`${rootClassName}`">
-    <h2 :class="`${rootClassName}`">
-      {{ topline }}
+    <h2 :class="`${rootClassName}--h2`">
+      {{ content }}
     </h2>
-    <span :class="`${rootClassName}-subline`">{{ subline }}</span>
   </div>
 </template>
 
@@ -12,29 +11,27 @@ import { ClassNames as GlobalClassNames } from '~/shared/constants'
 
 export default {
   props: {
-    topline: {
+    content: {
       type: String,
       default() {
         return 'Headline'
-      }
-    },
-    subline: {
-      type: String,
-      default() {
-        return 'Subline'
       }
     }
   },
   data() {
     return {
-      rootClassName: `${GlobalClassNames.PREFIX}-headline`
+      rootClassName: `${GlobalClassNames.PREFIX}-cHeadline`
     }
   }
 }
 </script>
 
 <style lang="scss">
-.dfb-bp-header {
-  font-size: 38px;
+.#{$CLASSNAME_PREFIX}-cHeadline {
+  &--h2 {
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1.2;
+  }
 }
 </style>

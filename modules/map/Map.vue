@@ -1,35 +1,42 @@
 <template>
-  <GMap
-    ref="gMap"
-    :zoom="zoom"
-    :center="{ lat: lat, lng: long }"
-    :options="mapOptions"
-    :cluster="{ options: { styles: clusterStyle } }"
-  >
-    <GMapMarker
-      v-for="location in incidents"
-      :key="location.id"
-      :position="{
-        lat: location.geocoding.lat,
-        lng: location.geocoding.long
-      }"
-      :options="markerOptions"
+  <section :class="[xclass, `${rootClassName}`]">
+    <Sidebar :xclass="`${rootClassName}-sidebar`" />
+    <GMap
+      ref="gMap"
+      :zoom="zoom"
+      :center="{ lat: lat, lng: long }"
+      :options="mapOptions"
+      :cluster="{ options: { styles: clusterStyle } }"
     >
-      <GMapInfoWindow>
-        <code>
-          {{ location.title }}
-        </code>
-      </GMapInfoWindow>
-    </GMapMarker>
-  </GMap>
+      <GMapMarker
+        v-for="location in incidents"
+        :key="location.id"
+        :position="{
+          lat: location.geocoding.lat,
+          lng: location.geocoding.long
+        }"
+        :options="markerOptions"
+      >
+        <GMapInfoWindow>
+          <code>
+            {{ location.title }}
+          </code>
+        </GMapInfoWindow>
+      </GMapMarker>
+    </GMap>
+  </section>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import { dark as darkMapStyle } from './style'
+import Sidebar from '~/modules/sidebar/Sidebar.vue'
 import { ClassNames as GlobalClassNames } from '~/shared/constants'
 
 export default {
+  components: {
+    Sidebar
+  },
   props: {
     xclass: {
       type: String
@@ -77,8 +84,22 @@ export default {
 </script>
 
 <style lang="scss">
-.GMap__Wrapper {
-  width: 100vw;
-  height: calc(100vh - #{$header-height});
+.#{$CLASSNAME_PREFIX}-mMap {
+  display: flex;
+
+  &-sidebar {
+    flex-basis: 20%;
+    height: calc(100vh - #{$header-height});
+  }
+
+  .GMap {
+    flex-basis: 80%;
+    height: calc(100vh - #{$header-height});
+
+    &__Wrapper {
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
 </style>
