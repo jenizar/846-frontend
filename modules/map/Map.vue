@@ -16,9 +16,25 @@
       :options="markerOptions"
     >
       <GMapInfoWindow>
-        <code>
-          {{ location.title }}
-        </code>
+        <div class="content-card animate_fadeInDown">
+          <div class="row-pt-md">
+            <h3>{{ location.title }}</h3>
+            <span>
+              {{
+                location.description === ''
+                  ? 'date unknown'
+                  : location.description
+              }}
+            </span>
+          </div>
+          <div class="row-pt-md">
+            <ul>
+              {{
+                location.links
+              }}
+            </ul>
+          </div>
+        </div>
       </GMapInfoWindow>
     </GMapMarker>
   </GMap>
@@ -43,12 +59,12 @@ export default {
       zoom: 5,
       mapOptions: {
         zoomControl: true,
-        mapTypeControl: false,
-        scaleControl: false,
+        mapTypeControl: true,
+        scaleControl: true,
         streetViewControl: false,
         rotateControl: false,
         fullscreenControl: false,
-        gestureHandling: 'none',
+        gestureHandling: 'cooperative',
         styles: darkMapStyle
       },
       clusterStyle: [
