@@ -48,7 +48,7 @@ export default {
         streetViewControl: false,
         rotateControl: false,
         fullscreenControl: false,
-        gestureHandling: 'none',
+        gestureHandling: 'cooperative',
         styles: darkMapStyle
       },
       clusterStyle: [
