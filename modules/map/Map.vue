@@ -12,15 +12,32 @@
         v-for="location in incidents"
         :key="location.id"
         :position="{
-          lat: location.geocoding.lat,
-          lng: location.geocoding.long
+          lat: noise(location.geocoding.lat),
+          lng: noise(location.geocoding.long)
         }"
         :options="markerOptions"
       >
         <GMapInfoWindow>
-          <code>
-            {{ location.title }}
-          </code>
+          <div class="content-card">
+            <h4>
+              {{ location.title }}
+            </h4>
+            <div class="row">
+              <p>
+                {{ printDate(location.date) }}
+              </p>
+            </div>
+            <div class="row">
+              <div v-for="link in location.links">
+                <a :href="link">
+                  {{ link }}
+                </a>
+                <div v-if="isTweet(link)">
+                  <Tweet :id="getTweetID(link)"></Tweet>
+                </div>
+              </div>
+            </div>
+          </div>
         </GMapInfoWindow>
       </GMapMarker>
     </GMap>
@@ -29,13 +46,15 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { Tweet } from 'vue-tweet-embed'
 import { dark as darkMapStyle } from './style'
 import Sidebar from '~/modules/sidebar/Sidebar.vue'
 import { ClassNames as GlobalClassNames } from '~/shared/constants'
 
 export default {
   components: {
-    Sidebar
+    Sidebar,
+    Tweet
   },
   props: {
     xclass: {
@@ -50,8 +69,8 @@ export default {
       zoom: 5,
       mapOptions: {
         zoomControl: true,
-        mapTypeControl: false,
-        scaleControl: false,
+        mapTypeControl: true,
+        scaleControl: true,
         streetViewControl: false,
         rotateControl: false,
         fullscreenControl: false,
@@ -79,7 +98,23 @@ export default {
     })
   },
   mounted() {},
-  methods: {}
+  methods: {
+    printDate: (date) => {
+      const thisDate = new Date(date)
+      if (thisDate <= 0) return 'date unknown'
+      return thisDate.toLocaleDateString()
+    },
+    isTweet: (link) => {
+      return link.match('status/[0-9]+$') !== null
+    },
+    getTweetID: (link) => {
+      return link.match('status/[0-9]+$')[0].replace('status/', '')
+    },
+    noise: (coord) => {
+      const scale = 2 * 0.001
+      return parseFloat(coord) + scale * (Math.random() - 0.5)
+    }
+  }
 }
 </script>
 
@@ -100,6 +135,33 @@ export default {
       width: 100%;
       height: 100%;
     }
+  }
+}
+.content-card {
+  display: block;
+  align-items: center;
+  padding-left: 0px;
+  padding-right: 12px;
+
+  .row {
+    padding-top: 5px;
+    padding-bottom: 17px;
+
+    p {
+      margin-left: 10px;
+      text-align: left;
+    }
+
+    .Tweet {
+      display: inherit;
+    }
+  }
+
+  h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: left;
   }
 }
 </style>
