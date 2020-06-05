@@ -111,7 +111,7 @@ export default {
       return link.match('status/[0-9]+$')[0].replace('status/', '')
     },
     noise: (coord) => {
-      const scale = 2 * 0.01
+      const scale = 2 * 0.001
       return parseFloat(coord) + scale * (Math.random() - 0.5)
     }
   }
