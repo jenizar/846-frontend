@@ -1,51 +1,61 @@
 <template>
-  <GMap
-    ref="gMap"
-    :zoom="zoom"
-    :center="{ lat: lat, lng: long }"
-    :options="mapOptions"
-    :cluster="{ options: { styles: clusterStyle } }"
-  >
-    <GMapMarker
-      v-for="location in incidents"
-      :key="location.id"
-      :position="{
-        lat: location.geocoding.lat,
-        lng: location.geocoding.long
-      }"
-      :options="markerOptions"
+  <section :class="[xclass, `${rootClassName}`]">
+    <Sidebar :xclass="`${rootClassName}-sidebar`" />
+    <GMap
+      ref="gMap"
+      :zoom="zoom"
+      :center="{ lat: lat, lng: long }"
+      :options="mapOptions"
+      :cluster="{ options: { styles: clusterStyle } }"
     >
-      <GMapInfoWindow>
-        <div class="content-card animate_fadeInDown">
-          <div class="row-pt-md">
-            <h3>{{ location.title }}</h3>
-            <span>
-              {{
-                location.description === ''
-                  ? 'date unknown'
-                  : location.description
-              }}
-            </span>
+      <GMapMarker
+        v-for="location in incidents"
+        :key="location.id"
+        :position="{
+          lat: noise(location.geocoding.lat),
+          lng: noise(location.geocoding.long)
+        }"
+        :options="markerOptions"
+      >
+        <GMapInfoWindow>
+          <div class="content-card">
+            <h4>
+              {{ location.title }}
+            </h4>
+            <div class="row">
+              <p>
+                {{ printDate(location.date) }}
+              </p>
+            </div>
+            <div class="row">
+              <div v-for="link in location.links">
+                <a :href="link">
+                  {{ link }}
+                </a>
+                <div v-if="isTweet(link)">
+                  <Tweet :id="getTweetID(link)"></Tweet>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="row-pt-md">
-            <ul>
-              {{
-                location.links
-              }}
-            </ul>
-          </div>
-        </div>
-      </GMapInfoWindow>
-    </GMapMarker>
-  </GMap>
+        </GMapInfoWindow>
+      </GMapMarker>
+    </GMap>
+  </section>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import { Tweet } from 'vue-tweet-embed'
 import { dark as darkMapStyle } from './style'
+import Sidebar from '~/modules/sidebar/Sidebar.vue'
 import { ClassNames as GlobalClassNames } from '~/shared/constants'
 
 export default {
+  components: {
+    Sidebar,
+    Tweet
+  },
   props: {
     xclass: {
       type: String
@@ -88,13 +98,70 @@ export default {
     })
   },
   mounted() {},
-  methods: {}
+  methods: {
+    printDate: (date) => {
+      const thisDate = new Date(date)
+      if (thisDate <= 0) return 'date unknown'
+      return thisDate.toLocaleDateString()
+    },
+    isTweet: (link) => {
+      return link.match('status/[0-9]+$') !== null
+    },
+    getTweetID: (link) => {
+      return link.match('status/[0-9]+$')[0].replace('status/', '')
+    },
+    noise: (coord) => {
+      const scale = 2 * 0.001
+      return parseFloat(coord) + scale * (Math.random() - 0.5)
+    }
+  }
 }
 </script>
 
 <style lang="scss">
-.GMap__Wrapper {
-  width: 100vw;
-  height: calc(100vh - #{$header-height});
+.#{$CLASSNAME_PREFIX}-mMap {
+  display: flex;
+
+  &-sidebar {
+    flex-basis: 20%;
+    height: calc(100vh - #{$header-height});
+  }
+
+  .GMap {
+    flex-basis: 80%;
+    height: calc(100vh - #{$header-height});
+
+    &__Wrapper {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+.content-card {
+  display: block;
+  align-items: center;
+  padding-left: 0px;
+  padding-right: 12px;
+
+  .row {
+    padding-top: 5px;
+    padding-bottom: 17px;
+
+    p {
+      margin-left: 10px;
+      text-align: left;
+    }
+
+    .Tweet {
+      display: inherit;
+    }
+  }
+
+  h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: left;
+  }
 }
 </style>
