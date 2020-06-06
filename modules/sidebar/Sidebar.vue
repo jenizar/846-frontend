@@ -27,6 +27,10 @@
         :date="printDate(activeIncident.date)"
       />
       <Paragraph :content="activeIncident.title" type="title" />
+      <Paragraph content="" type="spacer" />
+      <div v-for="link in activeIncident.links">
+        <Paragraph :content="link" type="link" :href="link" />
+      </div>
     </div>
   </aside>
 </template>
@@ -81,5 +85,6 @@ export default {
   padding: 30px;
   color: $pb-white;
   background-color: $pb-gray-900;
+  border-right: #fff;
 }
 </style>
