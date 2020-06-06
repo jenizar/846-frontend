@@ -81,7 +81,7 @@ export default {
       clusterStyle: [
         {
           url:
-            'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m3.png',
+            'https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/packages/markerclustererplus/images/m3.png',
           width: 66,
           height: 66,
           textColor: '#fff'
@@ -89,7 +89,7 @@ export default {
       ],
       markerOptions: {
         icon:
-          'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m3.png'
+          'https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/packages/markerclustererplus/images/m3.png'
       }
     }
   },
