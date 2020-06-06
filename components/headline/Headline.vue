@@ -49,6 +49,7 @@ export default {
     font-size: 16px;
     font-weight: 400;
     line-height: 1.2;
+    color: #bbbbbb;
   }
 }
 </style>
