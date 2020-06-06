@@ -25,15 +25,13 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { Tweet } from 'vue-tweet-embed'
 import { dark as darkMapStyle } from './style'
 import Sidebar from '~/modules/sidebar/Sidebar.vue'
 import { ClassNames as GlobalClassNames } from '~/shared/constants'
 
 export default {
   components: {
-    Sidebar,
-    Tweet
+    Sidebar
   },
   props: {
     xclass: {
@@ -86,12 +84,6 @@ export default {
       const thisDate = new Date(date)
       if (thisDate <= 0) return 'date unknown'
       return thisDate.toLocaleDateString()
-    },
-    isTweet: (link) => {
-      return link.match('status/[0-9]+$') !== null
-    },
-    getTweetID: (link) => {
-      return link.match('status/[0-9]+$')[0].replace('status/', '')
     },
     noise: (coord) => {
       const scale = 2 * 0.001
