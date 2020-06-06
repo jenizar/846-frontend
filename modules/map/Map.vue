@@ -116,9 +116,9 @@ export default {
       const scale = 2 * 0.001
       return parseFloat(coord) + scale * (Math.random() - 0.5)
     },
-    updateActiveIncident: function(incident) {
+    updateActiveIncident: (incident) => {
       this.$store.commit('global/setActiveIncident', {
-        activeIncident:incident
+        activeIncident: incident
       })
     }
   }
@@ -144,11 +144,12 @@ export default {
     }
   }
 }
+
 .content-card {
   display: block;
   align-items: center;
-  padding-left: 0px;
   padding-right: 12px;
+  padding-left: 0;
 
   .row {
     padding-top: 5px;
