@@ -11,6 +11,7 @@
       <Paragraph
         content="Work on this site is ongoing and still in progress. We are always looking for contributors in the fields of Backend, Frontend and Data Analysis."
       />
+      <Paragraph content="" type="spacer" />
       <Paragraph
         content="Contribute on GitHub"
         href="https://github.com/2020PB/police-brutality"
