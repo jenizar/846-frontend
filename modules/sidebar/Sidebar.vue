@@ -12,11 +12,9 @@
         content="Work on this site is ongoing and still in progress. We are always looking for contributors in the fields of Backend, Frontend and Data Analysis."
       />
       <Paragraph content="" type="spacer" />
-      <Paragraph
-        content="Contribute on GitHub"
-        href="https://github.com/2020PB/police-brutality"
-        type="link"
-      />
+      <a href="https://github.com/2020PB/police-brutality">
+        Contribute on GitHub
+      </a>
     </div>
     <div
       :class="`${rootClassName}-content ${rootClassName}-content--intro`"
@@ -29,7 +27,7 @@
       <Paragraph :content="activeIncident.title" type="title" />
       <Paragraph content="" type="spacer" />
       <div v-for="link in activeIncident.links">
-        <Paragraph :content="link" type="link" :href="link" />
+        <Paragraph :content="truncateLink(link)" type="link" :href="link" />
       </div>
     </div>
   </aside>
@@ -71,6 +69,10 @@ export default {
         month: 'long',
         year: 'numeric'
       }).format(thisDate)
+    },
+    truncateLink: (link) => {
+      if (link.length < 60) return link
+      return link.substring(0, 60) + '...'
     }
   }
 }
@@ -86,5 +88,10 @@ export default {
   color: $pb-white;
   background-color: $pb-gray-900;
   border-right: #fff;
+  a {
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+  }
 }
 </style>

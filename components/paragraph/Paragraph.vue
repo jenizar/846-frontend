@@ -51,6 +51,7 @@ export default {
     margin-top: 0.5em;
     font-size: 20px;
     font-weight: 500;
+    color: white;
   }
   &--body {
     margin-top: 1.5rem;
@@ -60,12 +61,12 @@ export default {
   }
   &--link {
     margin-top: 1rem;
-    font-size: 14px;
-    font-weight: 400;
-    font-style: none;
     overflow-wrap: anywhere;
     a {
-      color: #dddddd;
+      color: #dddddd !important;
+      font-size: 16px !important;
+      font-weight: 400 !important;
+      font-style: none !important;
     }
   }
   &--spacer {
