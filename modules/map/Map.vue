@@ -9,14 +9,14 @@
       :cluster="{ options: { styles: clusterStyle } }"
     >
       <GMapMarker
-        v-for="location in incidents"
+        v-for="(location, index) in incidents"
         :key="location.id"
         :position="{
           lat: noise(location.geocoding.lat),
           lng: noise(location.geocoding.long)
         }"
         :options="markerOptions"
-        @click="activate(location)"
+        @click="activate(location, index)"
       >
       </GMapMarker>
     </GMap>
@@ -66,6 +66,10 @@ export default {
       markerOptions: {
         icon:
           'https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/packages/markerclustererplus/images/m3.png'
+      },
+      highlightedMarkerOptions: {
+        icon:
+          'https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/packages/markerclustererplus/images/m2.png'
       }
     }
   },
@@ -89,7 +93,14 @@ export default {
       const scale = 2 * 0.001
       return parseFloat(coord) + scale * (Math.random() - 0.5)
     },
-    activate(incident) {
+    activate(incident, storeIndex) {
+      // lets get messy
+      this.$refs.gMap.markers.forEach((marker, index) => {
+        marker.setOptions(this.markerOptions)
+        if (storeIndex === index) {
+          marker.setOptions(this.highlightedMarkerOptions)
+        }
+      })
       this.updateActiveIncident(incident)
     }
   }
@@ -112,6 +123,10 @@ export default {
     &__Wrapper {
       width: 100%;
       height: 100%;
+    }
+
+    &.is-active {
+      transform: scale(2);
     }
   }
 }
