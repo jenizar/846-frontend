@@ -18,28 +18,6 @@
         :options="markerOptions"
         @click="activate(location)"
       >
-        <GMapInfoWindow>
-          <div class="content-card">
-            <h4>
-              {{ location.title }}
-            </h4>
-            <div class="row">
-              <p>
-                {{ printDate(location.date) }}
-              </p>
-            </div>
-            <div class="row">
-              <div v-for="(link, index) in location.links" v-bind:key="index">
-                <a :href="link">
-                  {{ link }}
-                </a>
-                <div v-if="isTweet(link)">
-                  <Tweet :id="getTweetID(link)"></Tweet>
-                </div>
-              </div>
-            </div>
-          </div>
-        </GMapInfoWindow>
       </GMapMarker>
     </GMap>
   </section>
@@ -47,15 +25,13 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { Tweet } from 'vue-tweet-embed'
 import { dark as darkMapStyle } from './style'
 import Sidebar from '~/modules/sidebar/Sidebar.vue'
 import { ClassNames as GlobalClassNames } from '~/shared/constants'
 
 export default {
   components: {
-    Sidebar,
-    Tweet
+    Sidebar
   },
   props: {
     xclass: {
@@ -108,12 +84,6 @@ export default {
       const thisDate = new Date(date)
       if (thisDate <= 0) return 'date unknown'
       return thisDate.toLocaleDateString()
-    },
-    isTweet: (link) => {
-      return link.match('status/[0-9]+$') !== null
-    },
-    getTweetID: (link) => {
-      return link.match('status/[0-9]+$')[0].replace('status/', '')
     },
     noise: (coord) => {
       const scale = 2 * 0.001

@@ -11,20 +11,21 @@
       <Paragraph
         content="Work on this site is ongoing and still in progress. We are always looking for contributors in the fields of Backend, Frontend and Data Analysis."
       />
-      <a
-        :class="`${rootClassName}-link`"
+      <Paragraph
+        content="Contribute on GitHub"
         href="https://github.com/2020PB/police-brutality"
-        target="_blank"
-      >
-        Contribute on GitHub
-      </a>
+        type="link"
+      />
     </div>
     <div
       :class="`${rootClassName}-content ${rootClassName}-content--intro`"
       v-else
     >
-      <Headline :content="`${activeIncident.city}, ${activeIncident.state}`" />
-      <Paragraph :content="activeIncident.title" />
+      <Headline
+        :content="`${activeIncident.city}, ${activeIncident.state}`"
+        :date="printDate(activeIncident.date)"
+      />
+      <Paragraph :content="activeIncident.title" type="title" />
     </div>
   </aside>
 </template>
@@ -55,6 +56,17 @@ export default {
       incidents: 'global/incidents',
       activeIncident: 'global/activeIncident'
     })
+  },
+  methods: {
+    printDate: (date) => {
+      const thisDate = Date.parse(date)
+      if (thisDate < 0) return 'date unknown'
+      return new Intl.DateTimeFormat('en-US', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      }).format(thisDate)
+    }
   }
 }
 </script>
@@ -65,13 +77,8 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 40px;
+  padding: 30px;
   color: $pb-white;
   background-color: $pb-gray-900;
-
-  &-link {
-    margin-top: 4rem;
-    color: white;
-  }
 }
 </style>
