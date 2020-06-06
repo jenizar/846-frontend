@@ -4,5 +4,8 @@ export default {
   },
   incidents(state) {
     return state.incidents
+  },
+  activeIncident(state) {
+    return state.activeIncident
   }
 }

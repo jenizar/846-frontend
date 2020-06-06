@@ -16,6 +16,7 @@
           lng: noise(location.geocoding.long)
         }"
         :options="markerOptions"
+        @click="updateActiveIncident(location)"
       >
         <GMapInfoWindow>
           <div class="content-card">
@@ -80,7 +81,7 @@ export default {
       clusterStyle: [
         {
           url:
-            'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m3.png',
+            'https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/packages/markerclustererplus/images/m3.png',
           width: 66,
           height: 66,
           textColor: '#fff'
@@ -88,13 +89,14 @@ export default {
       ],
       markerOptions: {
         icon:
-          'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m3.png'
+          'https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/packages/markerclustererplus/images/m3.png'
       }
     }
   },
   computed: {
     ...mapGetters({
-      incidents: 'global/incidents'
+      incidents: 'global/incidents',
+      activeIncident: 'global/activeIncident'
     })
   },
   mounted() {},
@@ -113,6 +115,11 @@ export default {
     noise: (coord) => {
       const scale = 2 * 0.001
       return parseFloat(coord) + scale * (Math.random() - 0.5)
+    },
+    updateActiveIncident: function(incident) {
+      this.$store.commit('global/setActiveIncident', {
+        activeIncident:incident
+      })
     }
   }
 }

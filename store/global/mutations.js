@@ -4,5 +4,8 @@ export default {
   },
   storeIncidents(state, data) {
     state.incidents = data.data
+  },
+  setActiveIncident(state, data) {
+    state.activeIncident = data.activeIncident
   }
 }
