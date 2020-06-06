@@ -7,6 +7,7 @@
       :center="{ lat: lat, lng: long }"
       :options="mapOptions"
       :cluster="{ options: { styles: clusterStyle } }"
+      @click="deactivate()"
     >
       <GMapMarker
         v-for="(location, index) in incidents"
