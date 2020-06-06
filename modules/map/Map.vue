@@ -46,7 +46,7 @@ export default {
       zoom: 5,
       mapOptions: {
         zoomControl: true,
-        mapTypeControl: true,
+        mapTypeControl: false,
         scaleControl: true,
         streetViewControl: false,
         rotateControl: false,
