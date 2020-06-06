@@ -18,28 +18,6 @@
         :options="markerOptions"
         @click="activate(location)"
       >
-        <GMapInfoWindow>
-          <div class="content-card">
-            <h4>
-              {{ location.title }}
-            </h4>
-            <div class="row">
-              <p>
-                {{ printDate(location.date) }}
-              </p>
-            </div>
-            <div class="row">
-              <div v-for="(link, index) in location.links" v-bind:key="index">
-                <a :href="link">
-                  {{ link }}
-                </a>
-                <div v-if="isTweet(link)">
-                  <Tweet :id="getTweetID(link)"></Tweet>
-                </div>
-              </div>
-            </div>
-          </div>
-        </GMapInfoWindow>
       </GMapMarker>
     </GMap>
   </section>
