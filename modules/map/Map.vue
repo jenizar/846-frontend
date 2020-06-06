@@ -16,7 +16,7 @@
           lng: noise(location.geocoding.long)
         }"
         :options="markerOptions"
-        @click="updateActiveIncident(location)"
+        @click="activate(location)"
       >
         <GMapInfoWindow>
           <div class="content-card">
@@ -29,7 +29,7 @@
               </p>
             </div>
             <div class="row">
-              <div v-for="link in location.links">
+              <div v-for="(link, index) in location.links" v-bind:key="index">
                 <a :href="link">
                   {{ link }}
                 </a>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { Tweet } from 'vue-tweet-embed'
 import { dark as darkMapStyle } from './style'
 import Sidebar from '~/modules/sidebar/Sidebar.vue'
@@ -101,6 +101,9 @@ export default {
   },
   mounted() {},
   methods: {
+    ...mapActions({
+      updateActiveIncident: 'global/setActiveIncident'
+    }),
     printDate: (date) => {
       const thisDate = new Date(date)
       if (thisDate <= 0) return 'date unknown'
@@ -116,10 +119,8 @@ export default {
       const scale = 2 * 0.001
       return parseFloat(coord) + scale * (Math.random() - 0.5)
     },
-    updateActiveIncident: (incident) => {
-      this.$store.commit('global/setActiveIncident', {
-        activeIncident: incident
-      })
+    activate(incident) {
+      this.updateActiveIncident(incident)
     }
   }
 }

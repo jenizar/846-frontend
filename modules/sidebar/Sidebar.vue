@@ -1,19 +1,31 @@
 <template>
   <aside :class="[xclass, `${rootClassName}`]">
-    <Headline content="What's this about?" />
-    <Paragraph
-      content="This interactive map showcases incidents with police enforcing unecessary actions against protesters during the Riots after the murder of George Floyd. Click on the markers on the map to learn more about each incident."
-    />
-    <Paragraph
-      content="Work on this site is ongoing and still in progress. We are always looking for contributors in the fields of Backend, Frontend and Data Analysis."
-    />
-    <a
-      :class="`${rootClassName}-link`"
-      href="https://github.com/2020PB/police-brutality"
-      target="_blank"
+    <div
+      :class="`${rootClassName}-content ${rootClassName}-content--intro`"
+      v-if="!activeIncident"
     >
-      Contribute on GitHub
-    </a>
+      <Headline content="What's this about?" />
+      <Paragraph
+        content="This interactive map showcases incidents with police enforcing unecessary actions against protesters during the Riots after the murder of George Floyd. Click on the markers on the map to learn more about each incident."
+      />
+      <Paragraph
+        content="Work on this site is ongoing and still in progress. We are always looking for contributors in the fields of Backend, Frontend and Data Analysis."
+      />
+      <a
+        :class="`${rootClassName}-link`"
+        href="https://github.com/2020PB/police-brutality"
+        target="_blank"
+      >
+        Contribute on GitHub
+      </a>
+    </div>
+    <div
+      :class="`${rootClassName}-content ${rootClassName}-content--intro`"
+      v-else
+    >
+      <Headline :content="`${activeIncident.city}, ${activeIncident.state}`" />
+      <Paragraph :content="activeIncident.title" />
+    </div>
   </aside>
 </template>
 
@@ -40,7 +52,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      incidents: 'global/incidents'
+      incidents: 'global/incidents',
+      activeIncident: 'global/activeIncident'
     })
   }
 }

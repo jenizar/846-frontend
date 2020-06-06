@@ -6,6 +6,6 @@ export default {
     state.incidents = data.data
   },
   setActiveIncident(state, data) {
-    state.activeIncident = data.activeIncident
+    state.activeIncident = data
   }
 }
