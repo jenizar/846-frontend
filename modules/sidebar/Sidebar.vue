@@ -37,14 +37,14 @@ import Paragraph from '~/components/paragraph/Paragraph.vue'
 import { ClassNames as GlobalClassNames } from '~/shared/constants'
 
 export default {
+  components: {
+    Headline,
+    Paragraph
+  },
   props: {
     xclass: {
       type: String
     }
-  },
-  components: {
-    Headline,
-    Paragraph
   },
   data() {
     return {
@@ -53,7 +53,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      incidents: 'global/incidents'
+      incidents: 'global/incidents',
+      activeIncident: 'global/activeIncident'
     })
   },
   methods: {

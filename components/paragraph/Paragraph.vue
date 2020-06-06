@@ -48,20 +48,22 @@ export default {
 .#{$CLASSNAME_PREFIX}-cParagraph {
   &--title {
     margin-top: 0.5em;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 500;
   }
   &--body {
     margin-top: 1.5rem;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
   }
   &--link {
     margin-top: 4rem;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 700;
     font-style: underline;
-    color: white;
+    a {
+      color: white;
+    }
   }
 }
 </style>

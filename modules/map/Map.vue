@@ -16,6 +16,7 @@
           lng: noise(location.geocoding.long)
         }"
         :options="markerOptions"
+        @click="activate(location)"
       >
         <GMapInfoWindow>
           <div class="content-card">
@@ -28,7 +29,7 @@
               </p>
             </div>
             <div class="row">
-              <div v-for="link in location.links">
+              <div v-for="(link, index) in location.links" v-bind:key="index">
                 <a :href="link">
                   {{ link }}
                 </a>
@@ -45,7 +46,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { Tweet } from 'vue-tweet-embed'
 import { dark as darkMapStyle } from './style'
 import Sidebar from '~/modules/sidebar/Sidebar.vue'
@@ -80,7 +81,7 @@ export default {
       clusterStyle: [
         {
           url:
-            'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m3.png',
+            'https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/packages/markerclustererplus/images/m3.png',
           width: 66,
           height: 66,
           textColor: '#fff'
@@ -88,17 +89,21 @@ export default {
       ],
       markerOptions: {
         icon:
-          'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m3.png'
+          'https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/packages/markerclustererplus/images/m3.png'
       }
     }
   },
   computed: {
     ...mapGetters({
-      incidents: 'global/incidents'
+      incidents: 'global/incidents',
+      activeIncident: 'global/activeIncident'
     })
   },
   mounted() {},
   methods: {
+    ...mapActions({
+      updateActiveIncident: 'global/setActiveIncident'
+    }),
     printDate: (date) => {
       const thisDate = new Date(date)
       if (thisDate <= 0) return 'date unknown'
@@ -113,6 +118,9 @@ export default {
     noise: (coord) => {
       const scale = 2 * 0.001
       return parseFloat(coord) + scale * (Math.random() - 0.5)
+    },
+    activate(incident) {
+      this.updateActiveIncident(incident)
     }
   }
 }
@@ -137,11 +145,12 @@ export default {
     }
   }
 }
+
 .content-card {
   display: block;
   align-items: center;
-  padding-left: 0px;
   padding-right: 12px;
+  padding-left: 0;
 
   .row {
     padding-top: 5px;

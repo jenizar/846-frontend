@@ -1,4 +1,5 @@
 export default () => ({
   debug: false,
-  incidents: []
+  incidents: [],
+  activeIncident: undefined
 })
