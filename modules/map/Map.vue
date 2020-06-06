@@ -16,6 +16,7 @@
           lng: noise(location.geocoding.long)
         }"
         :options="markerOptions"
+        @click="updateActiveIncident(location)"
       >
         <GMapInfoWindow>
           <div class="content-card">
@@ -94,7 +95,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      incidents: 'global/incidents'
+      incidents: 'global/incidents',
+      activeIncident: 'global/activeIncident'
     })
   },
   mounted() {},
@@ -113,6 +115,11 @@ export default {
     noise: (coord) => {
       const scale = 2 * 0.001
       return parseFloat(coord) + scale * (Math.random() - 0.5)
+    },
+    updateActiveIncident: function(incident) {
+      this.$store.commit('global/setActiveIncident', {
+        activeIncident:incident
+      })
     }
   }
 }
