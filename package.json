@@ -22,7 +22,8 @@
     "nuxt-babel": "^1.0.1",
     "nuxt-gmaps": "^1.1.9",
     "smarquee": "^1.0.5",
-    "vue-geolocation-api": "^0.1.17"
+    "vue-geolocation-api": "^0.1.17",
+    "vue-tweet-embed": "^2.4.0"
   },
   "devDependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
