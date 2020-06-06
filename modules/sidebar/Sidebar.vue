@@ -1,19 +1,32 @@
 <template>
   <aside :class="[xclass, `${rootClassName}`]">
-    <Headline content="What's this about?" />
-    <Paragraph
-      content="This interactive map showcases incidents with police enforcing unecessary actions against protesters during the Riots after the murder of George Floyd. Click on the markers on the map to learn more about each incident."
-    />
-    <Paragraph
-      content="Work on this site is ongoing and still in progress. We are always looking for contributors in the fields of Backend, Frontend and Data Analysis."
-    />
-    <a
-      href="https://github.com/2020PB/police-brutality"
-      :class="`${rootClassName}-link`"
-      target="_blank"
+    <div
+      :class="`${rootClassName}-content ${rootClassName}-content--intro`"
+      v-if="!activeIncident"
     >
-      Contribute on GitHub
-    </a>
+      <Headline content="What's this about?" />
+      <Paragraph
+        content="This interactive map showcases incidents with police enforcing unecessary actions against protesters during the Riots after the murder of George Floyd. Click on the markers on the map to learn more about each incident."
+      />
+      <Paragraph
+        content="Work on this site is ongoing and still in progress. We are always looking for contributors in the fields of Backend, Frontend and Data Analysis."
+      />
+      <Paragraph
+        content="Contribute on GitHub"
+        href="https://github.com/2020PB/police-brutality"
+        type="link"
+      />
+    </div>
+    <div
+      :class="`${rootClassName}-content ${rootClassName}-content--intro`"
+      v-else
+    >
+      <Headline
+        :content="`${activeIncident.city}, ${activeIncident.state}`"
+        :date="printDate(activeIncident.date)"
+      />
+      <Paragraph :content="activeIncident.title" type="title" />
+    </div>
   </aside>
 </template>
 
@@ -42,6 +55,17 @@ export default {
     ...mapGetters({
       incidents: 'global/incidents'
     })
+  },
+  methods: {
+    printDate: (date) => {
+      const thisDate = Date.parse(date)
+      if (thisDate < 0) return 'date unknown'
+      return new Intl.DateTimeFormat('en-US', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      }).format(thisDate)
+    }
   }
 }
 </script>
@@ -52,13 +76,8 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 40px;
+  padding: 30px;
   color: $pb-white;
   background-color: $pb-gray-900;
-
-  &-link {
-    margin-top: 4rem;
-    color: white;
-  }
 }
 </style>
