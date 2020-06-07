@@ -15,6 +15,9 @@
       <a href="https://github.com/2020PB/police-brutality">
         Contribute on GitHub
       </a>
+      <div class="icons">
+        Hello!
+      </div>
     </div>
     <div
       :class="`${rootClassName}-content ${rootClassName}-content--intro`"
@@ -45,7 +48,7 @@
                       :kind="'video'"
                       :controls="true"
                       :src="url"
-                      style="{ border-radius: 10px; border: 1px solid #303030; align-self: center;}"
+                      style="{ border-radius: 10px; border: 1px solid #303030; align-self: center; width: 100%; }"
                     >
                     </Media>
                   </div>
