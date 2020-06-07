@@ -9,6 +9,7 @@
     <div v-else-if="type == 'link'" :class="`${rootClassName}--link`">
       <a :href="href">{{ content }}</a>
     </div>
+    <div v-else-if="type == 'spacer'" :class="`${rootClassName}--spacer`"></div>
   </div>
 </template>
 
@@ -50,20 +51,26 @@ export default {
     margin-top: 0.5em;
     font-size: 20px;
     font-weight: 500;
+    color: white;
   }
   &--body {
     margin-top: 1.5rem;
     font-size: 14px;
     font-weight: 400;
+    padding-right: 10px;
   }
   &--link {
-    margin-top: 4rem;
-    font-size: 16px;
-    font-weight: 700;
-    font-style: underline;
+    margin-top: 1rem;
+    overflow-wrap: anywhere;
     a {
-      color: white;
+      color: #dddddd !important;
+      font-size: 16px !important;
+      font-weight: 400 !important;
+      font-style: none !important;
     }
+  }
+  &--spacer {
+    padding-top: 3rem;
   }
 }
 </style>

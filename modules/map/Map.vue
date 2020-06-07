@@ -7,6 +7,7 @@
       :center="{ lat: lat, lng: long }"
       :options="mapOptions"
       :cluster="{ options: { styles: clusterStyle } }"
+      @click="deactivate()"
     >
       <GMapMarker
         v-for="(location, index) in incidents"
@@ -20,6 +21,7 @@
       >
       </GMapMarker>
     </GMap>
+    <button @click="home()"></button>
   </section>
 </template>
 
@@ -46,7 +48,7 @@ export default {
       zoom: 5,
       mapOptions: {
         zoomControl: true,
-        mapTypeControl: true,
+        mapTypeControl: false,
         scaleControl: true,
         streetViewControl: false,
         rotateControl: false,
@@ -102,6 +104,16 @@ export default {
         }
       })
       this.updateActiveIncident(incident)
+    },
+    home() {
+      this.$refs.gMap.map.panTo({ lat: 39.8097343, lng: -98.5556199 })
+      this.$refs.gMap.map.setZoom(5)
+    },
+    deactivate() {
+      this.$refs.gMap.markers.forEach((marker, index) => {
+        marker.setOptions(this.markerOptions)
+      })
+      this.updateActiveIncident(null)
     }
   }
 }
@@ -128,6 +140,16 @@ export default {
     &.is-active {
       transform: scale(2);
     }
+  }
+
+  button {
+    position: absolute;
+    top: calc(100vh - 40px - 80px - 25px);
+    left: calc(100vw - 50px);
+    height: 40px;
+    width: 40px;
+    background: url('../../assets/home.png');
+    border: #777;
   }
 }
 
