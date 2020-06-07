@@ -76,7 +76,7 @@ export default {
       font-style: none !important;
       font-weight: 400 !important;
       color: #ddd !important;
-      overflow-wrap: anywhere;
+      word-break: break-all;
     }
   }
 
