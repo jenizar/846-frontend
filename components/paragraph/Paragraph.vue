@@ -67,16 +67,16 @@ export default {
   }
 
   &--link {
-    margin-top: 1rem;
-    overflow-wrap: anywhere;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
     padding-left: 10px;
-
+    padding-right: 10px;
     a {
-      padding-left: 10px;
       font-size: 16px !important;
       font-style: none !important;
       font-weight: 400 !important;
       color: #ddd !important;
+      overflow-wrap: anywhere;
     }
   }
 

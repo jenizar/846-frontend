@@ -6,7 +6,7 @@
     >
       <Headline content="What's this about?" />
       <Paragraph
-        content="This interactive map showcases incidents with police enforcing unecessary actions against protesters during the Riots after the murder of George Floyd. Click on the markers on the map to learn more about each incident."
+        content="This interactive map showcases incidents with police enforcing unnecessary actions against citizens during the protests after the murder of George Floyd. Click on the markers on the map to learn more about each incident."
       />
       <Paragraph
         content="Work on this site is ongoing and still in progress. We are always looking for contributors in the fields of Backend, Frontend and Data Analysis."
@@ -38,16 +38,25 @@
             card
           >
             <BTab title="Video" title-item-class="tab">
-              World!
+              Video Streams
             </BTab>
             <BTab title="Social Media" title-item-class="tab">
-              Reddit!
+              <div v-for="link in activeIncident.links" v-if="isTweet(link)">
+                <div class="container">
+                  <Tweet :id="getID(link)" widget-class="tweet" />
+                </div>
+              </div>
             </BTab>
             <BTab title="Sources" title-item-class="tab">
-              BLM!
+              <div v-for="link in activeIncident.links">
+                <Paragraph type="link" :href="link" :content="link" />
+              </div>
             </BTab>
           </BTabs>
         </BCard>
+      </div>
+      <div class="icons">
+        Hello!
       </div>
     </div>
   </aside>
@@ -55,7 +64,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-// import { Tweet } from 'vue-tweet-embed'
+import { Tweet } from 'vue-tweet-embed'
 // import VueCoreVideoPlayer from 'vue-core-video-player'
 import { BTabs, BTab, BCard } from 'bootstrap-vue'
 import Headline from '~/components/headline/Headline.vue'
@@ -68,8 +77,8 @@ export default {
     BTab,
     BTabs,
     Headline,
-    Paragraph
-    // Tweet
+    Paragraph,
+    Tweet
     // Player: VueCoreVideoPlayer
   },
   props: {
@@ -143,6 +152,19 @@ export default {
     font-weight: 700;
   }
   .media {
+    .active-tab {
+      max-height: 60vh;
+      overflow-y: scroll;
+      align-content: center;
+      display: block;
+      .container {
+        margin: 0% 4% 0% 4%;
+        .tweet {
+          padding: 5px;
+          align-self: center;
+        }
+      }
+    }
     .tab {
       a {
         margin: 0.25rem 0.25rem 0.25rem 0.5rem;
@@ -186,6 +208,12 @@ export default {
       border-radius: 0px 0px 5px 5px;
       border-top: 6px solid $pb-gray-900;
     }
+  }
+  .icons {
+    height: 100px;
+    position: absolute;
+    bottom: 30px;
+    background-color: #fff;
   }
 }
 </style>
