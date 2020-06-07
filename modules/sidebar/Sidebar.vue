@@ -178,7 +178,7 @@ export default {
   }
   .media {
     .active-tab {
-      max-height: 68vh;
+      max-height: 64vh;
       overflow-y: scroll;
       align-content: center;
       display: block;
