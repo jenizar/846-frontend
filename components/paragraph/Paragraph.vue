@@ -53,22 +53,26 @@ export default {
     font-weight: 500;
     color: white;
   }
+
   &--body {
+    padding-right: 10px;
     margin-top: 1.5rem;
     font-size: 15px;
     font-weight: 400;
-    padding-right: 10px;
   }
+
   &--link {
     margin-top: 1rem;
     overflow-wrap: anywhere;
+
     a {
-      color: #dddddd !important;
       font-size: 16px !important;
-      font-weight: 400 !important;
       font-style: none !important;
+      font-weight: 400 !important;
+      color: #ddd !important;
     }
   }
+
   &--spacer {
     padding-top: 3rem;
   }
