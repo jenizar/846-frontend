@@ -81,6 +81,29 @@ export default {
       activeIncident: 'global/activeIncident'
     })
   },
+  watch: {
+    activeIncident() {
+      // lets get messy
+      let storeIndex = 0
+
+      /* eslint-disable-next-line */
+      let storeHit = 0
+
+      this.incidents.forEach((incident, index) => {
+        if (incident.id === this.activeIncident.id) {
+          storeIndex = index
+          storeHit = incident
+        }
+      })
+
+      this.$refs.gMap.markers.forEach((marker, index) => {
+        marker.setOptions(this.markerOptions)
+        if (storeIndex === index) {
+          marker.setOptions(this.highlightedMarkerOptions)
+        }
+      })
+    }
+  },
   mounted() {},
   methods: {
     ...mapActions({
@@ -96,13 +119,7 @@ export default {
       return parseFloat(coord) + scale * (Math.random() - 0.5)
     },
     activate(incident, storeIndex) {
-      // lets get messy
-      this.$refs.gMap.markers.forEach((marker, index) => {
-        marker.setOptions(this.markerOptions)
-        if (storeIndex === index) {
-          marker.setOptions(this.highlightedMarkerOptions)
-        }
-      })
+      // this.$router.push({ path: incident.id }) TODO: activate when ready
       this.updateActiveIncident(incident)
     },
     home() {
@@ -146,8 +163,8 @@ export default {
     position: absolute;
     top: calc(100vh - 40px - 80px - 25px);
     left: calc(100vw - 50px);
-    height: 40px;
     width: 40px;
+    height: 40px;
     background: url('../../assets/home.png');
     border: #777;
   }
