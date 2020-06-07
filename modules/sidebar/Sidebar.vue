@@ -174,6 +174,7 @@ export default {
     color: white;
     font-size: 17px;
     font-weight: 700;
+    padding-left: 10px;
   }
   .media {
     .active-tab {

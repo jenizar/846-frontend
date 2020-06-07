@@ -90,7 +90,10 @@ export default {
       let storeHit = 0
 
       this.incidents.forEach((incident, index) => {
-        if (incident.id === this.activeIncident.id) {
+        if (
+          this.activeIncident !== null &&
+          incident.id === this.activeIncident.id
+        ) {
           storeIndex = index
           storeHit = incident
         }
