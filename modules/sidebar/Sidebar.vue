@@ -235,6 +235,9 @@ export default {
       color: #dddddd;
       border-radius: 0px 0px 5px 5px;
       border-top: 6px solid $pb-gray-900;
+      a {
+        padding-left: 0px !important;
+      }
     }
   }
   .icons {
