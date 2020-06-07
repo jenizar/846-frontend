@@ -37,9 +37,21 @@
             pills
             card
           >
-            <BTab title="Video" title-item-class="tab">
-              Video Streams
-            </BTab>
+            <div v-if="getEvidence(activeIncident) !== null">
+              <BTab title="Video" title-item-class="tab">
+                <div v-for="url in getEvidence(activeIncident)">
+                  <div class="video-container">
+                    <Media
+                      :kind="'video'"
+                      :controls="true"
+                      :src="url"
+                      style="{ border-radius: 10px; border: 1px solid #303030; align-self: center;}"
+                    >
+                    </Media>
+                  </div>
+                </div>
+              </BTab>
+            </div>
             <div v-if="countTweets(activeIncident) > 0">
               <BTab title="Social Media" title-item-class="tab">
                 <div v-for="link in activeIncident.links" v-if="isTweet(link)">
@@ -67,7 +79,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { Tweet } from 'vue-tweet-embed'
-// import VueCoreVideoPlayer from 'vue-core-video-player'
+import Media from '@dongido/vue-viaudio'
 import { BTabs, BTab, BCard } from 'bootstrap-vue'
 import Headline from '~/components/headline/Headline.vue'
 import Paragraph from '~/components/paragraph/Paragraph.vue'
@@ -80,8 +92,8 @@ export default {
     BTabs,
     Headline,
     Paragraph,
-    Tweet
-    // Player: VueCoreVideoPlayer
+    Tweet,
+    Media
   },
   props: {
     xclass: {
@@ -133,6 +145,16 @@ export default {
         if (link.match('status/[0-9]+') !== null) count++
       })
       return count
+    },
+    getEvidence(location) {
+      const evidences = location.evidence
+        .map((evidence) => (evidence !== null ? evidence.video : null))
+        .map((vids) => (vids !== null && vids.length > 0 ? vids[0] : null))
+        .map((video) => (video !== null ? video.streams : null))
+        .map((strms) => (strms !== null && strms.length > 0 ? strms[0] : null))
+        .map((stream) => (stream !== null ? stream.url : null))
+        .filter((url) => url !== null)
+      return evidences.length === 0 ? null : evidences
     }
   }
 }
@@ -155,10 +177,13 @@ export default {
   }
   .media {
     .active-tab {
-      max-height: 60vh;
+      max-height: 68vh;
       overflow-y: scroll;
       align-content: center;
       display: block;
+      .video-container {
+        margin: 4% 4% 4% 4%;
+      }
       .container {
         margin: 0% 4% 0% 4%;
         .tweet {
@@ -212,7 +237,7 @@ export default {
     }
   }
   .icons {
-    height: 100px;
+    height: 60px;
     position: absolute;
     bottom: 30px;
     background-color: #fff;

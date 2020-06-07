@@ -38,7 +38,6 @@ export default {
 <style lang="scss">
 .#{$CLASSNAME_PREFIX}-cHeadline {
   &--h2 {
-    margin-top: 1.5rem;
     font-size: 38px;
     font-weight: 800;
     line-height: 1.2;
