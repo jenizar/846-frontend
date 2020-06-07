@@ -59,6 +59,7 @@ export default {
     margin-top: 1.5rem;
     font-size: 15px;
     font-weight: 400;
+    line-height: 1.3;
   }
 
   &--link {
