@@ -55,7 +55,7 @@ export default {
   }
   &--body {
     margin-top: 1.5rem;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 400;
     padding-right: 10px;
   }

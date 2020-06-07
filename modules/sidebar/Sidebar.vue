@@ -26,8 +26,34 @@
       />
       <Paragraph :content="activeIncident.title" type="title" />
       <Paragraph content="" type="spacer" />
-      <div v-for="link in activeIncident.links">
-        <Paragraph :content="truncateLink(link)" type="link" :href="link" />
+      <div class="media">
+        <div v-if="countTweets(activeIncident) > 0">
+          <div class="section-header">Twitter Feed</div>
+        </div>
+        <div v-for="link in activeIncident.links" v-if="isTweet(link)">
+          <div class="tweet-spacer"></div>
+          <Tweet :id="getID(link)" :options="tweetOptions"></Tweet>
+        </div>
+        <div v-if="countTweets(activeIncident) > 0">
+          <div class="content-spacer"></div>
+        </div>
+        <div
+          v-if="
+            countTweets(activeIncident) > 0 &&
+              countNonTweets(activeIncident) > 0
+          "
+        >
+          <div class="section-header">Other Sources</div>
+        </div>
+        <div v-else-if="countNonTweets(activeIncident) > 0">
+          <div class="section-header">Links to Sources</div>
+        </div>
+        <div v-for="link in activeIncident.links" v-if="!isTweet(link)">
+          <Paragraph :content="link" type="link" :href="link" />
+        </div>
+        <div v-if="countNonTweets(activeIncident) > 0">
+          <div class="content-spacer"></div>
+        </div>
       </div>
     </div>
   </aside>
@@ -35,6 +61,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { Tweet } from 'vue-tweet-embed'
 import Headline from '~/components/headline/Headline.vue'
 import Paragraph from '~/components/paragraph/Paragraph.vue'
 import { ClassNames as GlobalClassNames } from '~/shared/constants'
@@ -42,7 +69,8 @@ import { ClassNames as GlobalClassNames } from '~/shared/constants'
 export default {
   components: {
     Headline,
-    Paragraph
+    Paragraph,
+    Tweet
   },
   props: {
     xclass: {
@@ -51,7 +79,8 @@ export default {
   },
   data() {
     return {
-      rootClassName: `${GlobalClassNames.PREFIX}-mSidebar`
+      rootClassName: `${GlobalClassNames.PREFIX}-mSidebar`,
+      tweetOptions: { cards: 'hidden' }
     }
   },
   computed: {
@@ -71,8 +100,28 @@ export default {
       }).format(thisDate)
     },
     truncateLink: (link) => {
-      if (link.length < 60) return link
-      return link.substring(0, 60) + '...'
+      if (link.length < 55) return link
+      return link.substring(0, 55) + '...'
+    },
+    isTweet: (link) => {
+      return link.match('status/[0-9]+') !== null
+    },
+    getID: (link) => {
+      return link.match('status/[0-9]+')[0].replace('status/', '')
+    },
+    countNonTweets: (location) => {
+      let count = 0
+      location.links.forEach((link) => {
+        if (link.match('status/[0-9]+') == null) count++
+      })
+      return count
+    },
+    countTweets: (location) => {
+      let count = 0
+      location.links.forEach((link) => {
+        if (link.match('status/[0-9]+') !== null) count++
+      })
+      return count
     }
   }
 }
@@ -90,8 +139,31 @@ export default {
   border-right: #fff;
   a {
     color: white;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 700;
+  }
+  .media {
+    .section-header {
+      padding-top: 40px;
+      font-size: 28px;
+      font-weight: 700;
+    }
+    .content-spacer {
+      padding-top: 40px;
+    }
+    .tweet-spacer {
+      padding-top: 10px;
+    }
+    hr {
+      margin-top: -1px;
+      margin-left: -10px;
+      border-color: #666;
+      width: calc(100% + 15px);
+      ::after {
+        padding-top: 0px;
+        padding-bottom: 20px;
+      }
+    }
   }
 }
 </style>
