@@ -42,10 +42,12 @@ export default {
     font-size: 38px;
     font-weight: 800;
     line-height: 1.2;
+    padding-left: 10px;
   }
   &--p {
     margin-top: 0.5em;
     margin-bottom: 2em;
+    padding-left: 10px;
     font-size: 16px;
     font-weight: 400;
     line-height: 1.2;

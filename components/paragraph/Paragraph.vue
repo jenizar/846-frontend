@@ -52,9 +52,13 @@ export default {
     font-size: 20px;
     font-weight: 500;
     color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: justify;
   }
 
   &--body {
+    padding-left: 10px;
     padding-right: 10px;
     margin-top: 1.5rem;
     font-size: 15px;
@@ -65,8 +69,10 @@ export default {
   &--link {
     margin-top: 1rem;
     overflow-wrap: anywhere;
+    padding-left: 10px;
 
     a {
+      padding-left: 10px;
       font-size: 16px !important;
       font-style: none !important;
       font-weight: 400 !important;
@@ -75,6 +81,7 @@ export default {
   }
 
   &--spacer {
+    padding-left: 10px;
     padding-top: 3rem;
   }
 }

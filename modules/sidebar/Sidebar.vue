@@ -27,33 +27,27 @@
       <Paragraph :content="activeIncident.title" type="title" />
       <Paragraph content="" type="spacer" />
       <div class="media">
-        <div v-if="countTweets(activeIncident) > 0">
-          <div class="section-header">Twitter Feed</div>
-        </div>
-        <div v-for="link in activeIncident.links" v-if="isTweet(link)">
-          <div class="tweet-spacer"></div>
-          <Tweet :id="getID(link)" :options="tweetOptions"></Tweet>
-        </div>
-        <div v-if="countTweets(activeIncident) > 0">
-          <div class="content-spacer"></div>
-        </div>
-        <div
-          v-if="
-            countTweets(activeIncident) > 0 &&
-              countNonTweets(activeIncident) > 0
-          "
-        >
-          <div class="section-header">Other Sources</div>
-        </div>
-        <div v-else-if="countNonTweets(activeIncident) > 0">
-          <div class="section-header">Links to Sources</div>
-        </div>
-        <div v-for="link in activeIncident.links" v-if="!isTweet(link)">
-          <Paragraph :content="link" type="link" :href="link" />
-        </div>
-        <div v-if="countNonTweets(activeIncident) > 0">
-          <div class="content-spacer"></div>
-        </div>
+        <BCard>
+          <BTabs
+            content-class="inside-tab"
+            nav-class="nav"
+            nav-wrapper-class="tab-list"
+            active-nav-item-class="active-nav"
+            active-tab-class="active-tab"
+            pills
+            card
+          >
+            <BTab title="Video" title-item-class="tab">
+              World!
+            </BTab>
+            <BTab title="Social Media" title-item-class="tab">
+              Reddit!
+            </BTab>
+            <BTab title="Sources" title-item-class="tab">
+              BLM!
+            </BTab>
+          </BTabs>
+        </BCard>
       </div>
     </div>
   </aside>
@@ -61,16 +55,22 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { Tweet } from 'vue-tweet-embed'
+// import { Tweet } from 'vue-tweet-embed'
+// import VueCoreVideoPlayer from 'vue-core-video-player'
+import { BTabs, BTab, BCard } from 'bootstrap-vue'
 import Headline from '~/components/headline/Headline.vue'
 import Paragraph from '~/components/paragraph/Paragraph.vue'
 import { ClassNames as GlobalClassNames } from '~/shared/constants'
 
 export default {
   components: {
+    BCard,
+    BTab,
+    BTabs,
     Headline,
-    Paragraph,
-    Tweet
+    Paragraph
+    // Tweet
+    // Player: VueCoreVideoPlayer
   },
   props: {
     xclass: {
@@ -143,26 +143,48 @@ export default {
     font-weight: 700;
   }
   .media {
-    .section-header {
-      padding-top: 40px;
-      font-size: 28px;
-      font-weight: 700;
-    }
-    .content-spacer {
-      padding-top: 40px;
-    }
-    .tweet-spacer {
-      padding-top: 10px;
-    }
-    hr {
-      margin-top: -1px;
-      margin-left: -10px;
-      border-color: #666;
-      width: calc(100% + 15px);
-      ::after {
-        padding-top: 0px;
-        padding-bottom: 20px;
+    .tab {
+      a {
+        margin: 0.25rem 0.25rem 0.25rem 0.5rem;
+        padding: 0.5rem 1rem;
+        background-color: $pb-gray-900;
+        border-top: 2px #050303 solid;
+        border-bottom: 0px solid;
+        border-radius: 8px 8px 0px 0px;
+        font-size: 20px;
+        text-decoration: none;
+        color: #7b7b7b;
+        outline: none;
       }
+      .active-nav {
+        background-color: $pb-gray-900;
+        color: #db9a00;
+        outline: none;
+      }
+    }
+    .tab:hover {
+      a {
+        color: #eeeeee;
+      }
+      .active-nav {
+        color: #db9a00;
+      }
+    }
+    .nav {
+      display: flex;
+      padding: 1.25rem 0.25rem 0.5rem 0.25rem;
+      background-color: #050303;
+      border-radius: 5px 5px 0px 0px;
+    }
+    .tab-list {
+      display: inline;
+    }
+    .inside-tab {
+      padding: 1rem 1rem 1rem 1rem;
+      background-color: #050303;
+      color: #dddddd;
+      border-radius: 0px 0px 5px 5px;
+      border-top: 6px solid $pb-gray-900;
     }
   }
 }

@@ -15,6 +15,8 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.8.0",
     "@nuxtjs/svg-sprite": "^0.4.10",
+    "bootstrap": "^4.5.0",
+    "bootstrap-vue": "^2.15.0",
     "lint-staged": "^7.3.0",
     "lodash": "^4.17.15",
     "normalize.css": "^8.0.1",
