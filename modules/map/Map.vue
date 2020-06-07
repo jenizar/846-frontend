@@ -141,12 +141,13 @@ export default {
   display: flex;
 
   &-sidebar {
-    flex-basis: 20%;
+    flex-basis: 22%;
     height: calc(100vh - #{$header-height});
+    overflow-y: scroll;
   }
 
   .GMap {
-    flex-basis: 80%;
+    flex-basis: 78%;
     height: calc(100vh - #{$header-height});
 
     &__Wrapper {
