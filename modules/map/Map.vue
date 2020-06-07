@@ -124,6 +124,7 @@ export default {
     activate(incident, storeIndex) {
       // this.$router.push({ path: incident.id }) TODO: activate when ready
       this.updateActiveIncident(incident)
+      this.$forceUpdate()
     },
     home() {
       this.$refs.gMap.map.panTo({ lat: 39.8097343, lng: -98.5556199 })
@@ -144,12 +145,12 @@ export default {
   display: flex;
 
   &-sidebar {
-    flex-basis: 25%;
+    flex-basis: 28%;
     height: calc(100vh - #{$header-height});
   }
 
   .GMap {
-    flex-basis: 75%;
+    flex-basis: 72%;
     height: calc(100vh - #{$header-height});
 
     &__Wrapper {
@@ -186,10 +187,6 @@ export default {
     p {
       margin-left: 10px;
       text-align: left;
-    }
-
-    .Tweet {
-      display: inherit;
     }
   }
 

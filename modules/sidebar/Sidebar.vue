@@ -16,7 +16,7 @@
         Contribute on GitHub
       </a>
       <div class="icons">
-        Hello!
+        <p>Hello!</p>
       </div>
     </div>
     <div
@@ -29,7 +29,7 @@
       />
       <Paragraph :content="activeIncident.title" type="title" />
       <Paragraph content="" type="spacer" />
-      <div class="media">
+      <div :class="'media'" :key="activeIncident.id">
         <BCard>
           <BTabs
             content-class="inside-tab"
@@ -41,7 +41,7 @@
             card
           >
             <div v-if="getEvidence(activeIncident) !== null">
-              <BTab title="Video" title-item-class="tab">
+              <BTab title="Video" title-item-class="tab" lazy>
                 <div v-for="url in getEvidence(activeIncident)">
                   <div class="video-container">
                     <Media
@@ -56,7 +56,7 @@
               </BTab>
             </div>
             <div v-if="countTweets(activeIncident) > 0">
-              <BTab title="Social Media" title-item-class="tab">
+              <BTab title="Social Media" title-item-class="tab" lazy>
                 <div v-for="link in activeIncident.links" v-if="isTweet(link)">
                   <div class="container">
                     <Tweet :id="getID(link)" widget-class="tweet" />
@@ -64,8 +64,8 @@
                 </div>
               </BTab>
             </div>
-            <BTab title="Sources" title-item-class="tab">
-              <div v-for="link in activeIncident.links">
+            <BTab title="Sources" title-item-class="tab" lazy>
+              <div v-for="link in activeIncident.links" class="para">
                 <Paragraph type="link" :href="link" :content="link" />
               </div>
             </BTab>
@@ -73,7 +73,7 @@
         </BCard>
       </div>
       <div class="icons">
-        Hello!
+        <p>Hello!</p>
       </div>
     </div>
   </aside>
@@ -181,18 +181,27 @@ export default {
   }
   .media {
     .active-tab {
-      max-height: 64vh;
+      max-height: 55vh;
       overflow-y: scroll;
-      align-content: center;
-      display: block;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      max-width: 100%;
+      .para {
+        align-self: start !important;
+      }
       .video-container {
         margin: 4% 4% 4% 4%;
       }
       .container {
-        margin: 0% 4% 0% 4%;
+        margin: 0% 1% 0% 1%;
+        display: block;
+        max-width: 22vw;
+        width: 22vw;
+        overflow: hidden;
         .tweet {
           padding: 5px;
-          align-self: center;
+          width: 100%;
         }
       }
     }
@@ -244,10 +253,15 @@ export default {
     }
   }
   .icons {
-    height: 60px;
+    width: calc(25vw - 1px);
+    height: 50px;
     position: absolute;
-    bottom: 30px;
-    background-color: #fff;
+    bottom: 10px;
+    border-radius: 5px;
+    background-color: #000;
+    p {
+      margin: 1rem;
+    }
   }
 }
 </style>

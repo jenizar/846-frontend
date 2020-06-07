@@ -64,6 +64,8 @@ export default {
     font-size: 15px;
     font-weight: 400;
     line-height: 1.3;
+    align-self: start !important;
+    text-align: left !important;
   }
 
   &--link {
@@ -71,12 +73,15 @@ export default {
     margin-bottom: 1rem;
     padding-left: 10px;
     padding-right: 10px;
+    align-self: start !important;
     a {
       font-size: 16px !important;
       font-style: none !important;
       font-weight: 400 !important;
       color: #ddd !important;
       word-break: break-all;
+      text-align: left !important;
+      align-self: start !important;
     }
   }
 
