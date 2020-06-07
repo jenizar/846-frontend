@@ -40,13 +40,15 @@
             <BTab title="Video" title-item-class="tab">
               Video Streams
             </BTab>
-            <BTab title="Social Media" title-item-class="tab">
-              <div v-for="link in activeIncident.links" v-if="isTweet(link)">
-                <div class="container">
-                  <Tweet :id="getID(link)" widget-class="tweet" />
+            <div v-if="countTweets(activeIncident) > 0">
+              <BTab title="Social Media" title-item-class="tab">
+                <div v-for="link in activeIncident.links" v-if="isTweet(link)">
+                  <div class="container">
+                    <Tweet :id="getID(link)" widget-class="tweet" />
+                  </div>
                 </div>
-              </div>
-            </BTab>
+              </BTab>
+            </div>
             <BTab title="Sources" title-item-class="tab">
               <div v-for="link in activeIncident.links">
                 <Paragraph type="link" :href="link" :content="link" />
