@@ -214,7 +214,7 @@ export default {
   flex-direction: column;
   height: 100%;
   padding: 30px;
-  color: $pb-white;
+  color: #dddddd;
   background-color: $pb-gray-900;
   border-right: #fff;
   a {

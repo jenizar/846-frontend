@@ -42,6 +42,7 @@ export default {
     font-weight: 800;
     line-height: 1.2;
     padding-left: 10px;
+    color: white;
   }
   &--p {
     margin-top: 0.5em;
