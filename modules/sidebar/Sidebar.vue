@@ -220,7 +220,7 @@ export default {
   }
   .media {
     .active-tab {
-      max-height: 50vh;
+      max-height: 52vh;
       overflow-y: scroll;
       align-items: center;
       display: flex;
@@ -292,17 +292,16 @@ export default {
     }
   }
   .icons {
-    width: calc(25vw - 1px);
+    width: calc(28vw - 60px);
     height: 50px;
     position: absolute;
     left: 30px;
-    bottom: 20px;
+    bottom: 15px;
     border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    margin-left: -10px;
     .btn {
       margin: 0rem 1rem 0rem 1rem;
       padding: 0;
