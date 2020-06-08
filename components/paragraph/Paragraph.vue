@@ -70,6 +70,8 @@ export default {
   }
 
   &--link {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     padding-left: 10px;
     padding-right: 10px;
     align-self: start !important;

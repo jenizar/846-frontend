@@ -74,11 +74,22 @@
                 </div>
               </BTab>
             </div>
-            <div v-if="countTweets(activeIncident) > 0">
+            <div
+              v-if="
+                countTweets(activeIncident) + countInstas(activeIncident) > 0
+              "
+            >
               <BTab title="Social Media" title-item-class="tab" lazy>
-                <div v-for="link in activeIncident.links" v-if="isTweet(link)">
-                  <div class="container">
+                <div v-for="link in activeIncident.links">
+                  <div v-if="isTweet(link)" class="container">
                     <Tweet :id="getID(link)" widget-class="tweet" />
+                  </div>
+                  <div v-if="isInsta(link)" class="container">
+                    <InstagramEmbed
+                      :url="link"
+                      class="insta"
+                      :max-width="320"
+                    />
                   </div>
                 </div>
               </BTab>
@@ -115,6 +126,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { Tweet } from 'vue-tweet-embed'
+import InstagramEmbed from 'vue-instagram-embed'
 import Media from '@dongido/vue-viaudio'
 import { BTabs, BTab, BCard } from 'bootstrap-vue'
 import Facebook from '~/assets/svg/facebook.svg'
@@ -132,6 +144,7 @@ export default {
     BTab,
     BTabs,
     Headline,
+    InstagramEmbed,
     Media,
     Paragraph,
     Tweet,
@@ -176,13 +189,16 @@ export default {
     isTweet: (link) => {
       return link.match('status/[0-9]+') !== null
     },
+    isInsta: (link) => {
+      return link.match('instagram.com') !== null
+    },
     getID: (link) => {
       return link.match('status/[0-9]+')[0].replace('status/', '')
     },
-    countNonTweets: (location) => {
+    countInstas: (location) => {
       let count = 0
       location.links.forEach((link) => {
-        if (link.match('status/[0-9]+') == null) count++
+        if (link.match('instagram.com') !== null) count++
       })
       return count
     },
@@ -239,13 +255,24 @@ export default {
       }
       .container {
         margin: 0% 1% 0% 1%;
-        display: block;
-        max-width: 22vw;
-        width: 22vw;
+        display: flex;
+        flex-direction: column;
+        max-width: 21vw;
+        width: 21vw;
         overflow: hidden;
+        align-items: center;
         .tweet {
           padding: 5px;
           width: 100%;
+          max-width: 335px;
+          border-radius: 2px;
+        }
+        .insta {
+          padding: 5px;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
       }
     }
@@ -297,7 +324,7 @@ export default {
     }
   }
   .icons {
-    width: calc(28vw - 60px);
+    width: calc(25vw - 60px);
     height: 50px;
     position: absolute;
     left: 30px;
@@ -308,16 +335,16 @@ export default {
     justify-content: center;
     flex-direction: row;
     .btn {
-      margin: 0rem 1rem 0rem 1rem;
+      margin: 0rem 1.5rem 0rem 1.5rem;
       padding: 0;
       display: inline;
       align-self: center;
-      height: 40px;
-      width: 40px;
+      height: 30px;
+      width: 30px;
     }
     .logo {
-      height: 40px;
-      width: 40px;
+      height: 30px;
+      width: 30px;
       fill: #bbbbbb;
     }
   }
