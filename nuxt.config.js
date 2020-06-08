@@ -57,5 +57,25 @@ export default {
   /*
    ** Build configuration
    */
-  build: {}
+  build: {
+    extend(config, { isDev, isClient }) {
+      if (isDev && isClient) {
+        config.module.rules.push({
+          enforce: "pre",
+          test: /\.(js|vue)$/,
+          loader: "eslint-loader",
+          exclude: /(node_modules)/
+        });
+      }
+      config.module.rules
+        .filter(r => r.test.toString().includes("svg"))
+        .forEach(r => {
+          r.test = /\.(png|jpe?g|gif)$/;
+        });
+      config.module.rules.push({
+        test: /\.svg$/,
+        loader: "vue-svg-loader"
+      });
+    }
+  },
 }

@@ -16,7 +16,21 @@
         Contribute on GitHub
       </a>
       <div class="icons">
-        <p>Hello!</p>
+        <a :href="Endpoints.FACEBOOK" class="btn">
+          <Facebook class="logo" />
+        </a>
+        <a :href="Endpoints.INSTAGRAM" class="btn">
+          <Instagram class="logo" />
+        </a>
+        <a :href="Endpoints.TWITTER" class="btn">
+          <Twitter class="logo" />
+        </a>
+        <a :href="Endpoints.REDDIT" class="btn">
+          <Reddit class="logo" />
+        </a>
+        <a :href="Endpoints.GITHUB" class="btn">
+          <GitHub class="logo" />
+        </a>
       </div>
     </div>
     <div
@@ -73,7 +87,21 @@
         </BCard>
       </div>
       <div class="icons">
-        <p>Hello!</p>
+        <a :href="Endpoints.FACEBOOK" class="btn">
+          <Facebook class="logo" />
+        </a>
+        <a :href="Endpoints.INSTAGRAM" class="btn">
+          <Instagram class="logo" />
+        </a>
+        <a :href="Endpoints.TWITTER" class="btn">
+          <Twitter class="logo" />
+        </a>
+        <a :href="Endpoints.REDDIT" class="btn">
+          <Reddit class="logo" />
+        </a>
+        <a :href="Endpoints.GITHUB" class="btn">
+          <GitHub class="logo" />
+        </a>
       </div>
     </div>
   </aside>
@@ -84,9 +112,14 @@ import { mapGetters } from 'vuex'
 import { Tweet } from 'vue-tweet-embed'
 import Media from '@dongido/vue-viaudio'
 import { BTabs, BTab, BCard } from 'bootstrap-vue'
+import Facebook from '~/assets/svg/facebook.svg'
+import Instagram from '~/assets/svg/instagram.svg'
+import Twitter from '~/assets/svg/twitter.svg'
+import Reddit from '~/assets/svg/reddit.svg'
+import GitHub from '~/assets/svg/github.svg'
 import Headline from '~/components/headline/Headline.vue'
 import Paragraph from '~/components/paragraph/Paragraph.vue'
-import { ClassNames as GlobalClassNames } from '~/shared/constants'
+import { Endpoints, ClassNames as GlobalClassNames } from '~/shared/constants'
 
 export default {
   components: {
@@ -94,9 +127,14 @@ export default {
     BTab,
     BTabs,
     Headline,
+    Media,
     Paragraph,
     Tweet,
-    Media
+    Facebook,
+    Instagram,
+    Twitter,
+    Reddit,
+    GitHub
   },
   props: {
     xclass: {
@@ -106,7 +144,8 @@ export default {
   data() {
     return {
       rootClassName: `${GlobalClassNames.PREFIX}-mSidebar`,
-      tweetOptions: { cards: 'hidden' }
+      tweetOptions: { cards: 'hidden' },
+      Endpoints
     }
   },
   computed: {
@@ -181,7 +220,7 @@ export default {
   }
   .media {
     .active-tab {
-      max-height: 55vh;
+      max-height: 50vh;
       overflow-y: scroll;
       align-items: center;
       display: flex;
@@ -256,11 +295,26 @@ export default {
     width: calc(25vw - 1px);
     height: 50px;
     position: absolute;
-    bottom: 10px;
+    left: 30px;
+    bottom: 20px;
     border-radius: 5px;
-    background-color: #000;
-    p {
-      margin: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin-left: -10px;
+    .btn {
+      margin: 0rem 1rem 0rem 1rem;
+      padding: 0;
+      display: inline;
+      align-self: center;
+      height: 40px;
+      width: 40px;
+    }
+    .logo {
+      height: 40px;
+      width: 40px;
+      fill: #bbbbbb;
     }
   }
 }

@@ -5,7 +5,7 @@
   "author": "Manuel Maier",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "nuxt --port 3001",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -26,6 +26,8 @@
     "nuxt-gmaps": "^1.1.9",
     "smarquee": "^1.0.5",
     "vue-geolocation-api": "^0.1.17",
+    "vue-svg-loader": "^0.16.0",
+    "vue-template-compiler": "^2.6.11",
     "vue-tweet-embed": "^2.4.0"
   },
   "devDependencies": {
