@@ -6,14 +6,19 @@
     >
       <Headline content="What's this about?" />
       <Paragraph
-        content="This interactive map showcases incidents with police enforcing unnecessary actions against citizens during the protests after the murder of George Floyd. Click on the markers on the map to learn more about each incident."
+        content="This interactive map showcases incidents where police responded to citizens at the peaceful George Floyd protests with unnecessary force and brutality. Click on the markers on the map to learn more about each incident."
       />
       <Paragraph
-        content="Work on this site is ongoing and still in progress. We are always looking for contributors in the fields of Backend, Frontend and Data Analysis."
+        content="This site is a work in progress. We are always looking for contributors in frontend, backend, and data roles, no matter whether you're an experienced developer or you're new and wanting to help the cause."
       />
-      <Paragraph content="" type="spacer" />
+      <a href="https://github.com/mnlmaier/846-frontend">
+        Contribute to this site
+      </a>
+      <Paragraph
+        content="Have an incident to report? Want to help research, review, or curate sources and evidence?"
+      />
       <a href="https://github.com/2020PB/police-brutality">
-        Contribute on GitHub
+        Join us on GitHub
       </a>
       <div class="icons">
         <a :href="Endpoints.FACEBOOK" class="btn">

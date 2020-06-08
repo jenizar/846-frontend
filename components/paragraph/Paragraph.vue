@@ -60,8 +60,9 @@ export default {
   &--body {
     padding-left: 10px;
     padding-right: 10px;
-    margin-top: 1.5rem;
-    font-size: 15px;
+    margin-top: 3rem;
+    margin-bottom: 0.5rem;
+    font-size: 16px;
     font-weight: 400;
     line-height: 1.3;
     align-self: start !important;
@@ -69,8 +70,6 @@ export default {
   }
 
   &--link {
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
     padding-left: 10px;
     padding-right: 10px;
     align-self: start !important;
@@ -87,7 +86,7 @@ export default {
 
   &--spacer {
     padding-left: 10px;
-    padding-top: 3rem;
+    padding-top: 2rem;
   }
 }
 </style>
