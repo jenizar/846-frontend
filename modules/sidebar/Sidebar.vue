@@ -324,7 +324,7 @@ export default {
     }
   }
   .icons {
-    width: calc(25vw - 60px);
+    width: calc(28vw - 60px);
     height: 50px;
     position: absolute;
     left: 30px;
