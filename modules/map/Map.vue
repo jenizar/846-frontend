@@ -90,7 +90,10 @@ export default {
       let storeHit = 0
 
       this.incidents.forEach((incident, index) => {
-        if (incident.id === this.activeIncident.id) {
+        if (
+          this.activeIncident !== null &&
+          incident.id === this.activeIncident.id
+        ) {
           storeIndex = index
           storeHit = incident
         }
@@ -121,6 +124,7 @@ export default {
     activate(incident, storeIndex) {
       // this.$router.push({ path: incident.id }) TODO: activate when ready
       this.updateActiveIncident(incident)
+      this.$forceUpdate()
     },
     home() {
       this.$refs.gMap.map.panTo({ lat: 39.8097343, lng: -98.5556199 })
@@ -141,13 +145,12 @@ export default {
   display: flex;
 
   &-sidebar {
-    flex-basis: 22%;
+    flex-basis: 28%;
     height: calc(100vh - #{$header-height});
-    overflow-y: scroll;
   }
 
   .GMap {
-    flex-basis: 78%;
+    flex-basis: 72%;
     height: calc(100vh - #{$header-height});
 
     &__Wrapper {
@@ -184,10 +187,6 @@ export default {
     p {
       margin-left: 10px;
       text-align: left;
-    }
-
-    .Tweet {
-      display: inherit;
     }
   }
 
