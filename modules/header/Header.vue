@@ -32,23 +32,48 @@ export default {
 </script>
 
 <style lang="scss">
-.#{$CLASSNAME_PREFIX}-mHeader {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: $header-height;
-  font-weight: 800;
-  color: $pb-white;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  background-color: $pb-black;
+@media (min-width: 520px) {
+  .#{$CLASSNAME_PREFIX}-mHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $header-height;
+    font-weight: 800;
+    color: $pb-white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background-color: $pb-black;
 
-  &-highlight {
-    margin-right: 0.5rem;
-    margin-bottom: 0.125rem;
-    margin-left: 0.5rem;
-    font-size: 1.5rem;
-    color: $pb-red;
+    &-highlight {
+      margin-right: 0.5rem;
+      margin-bottom: 0.125rem;
+      margin-left: 0.5rem;
+      font-size: 1.5rem;
+      color: $pb-red;
+    }
+  }
+}
+@media (max-width: 520px) {
+  .#{$CLASSNAME_PREFIX}-mHeader {
+    margin-top: 5px;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    height: $header-height;
+    font-weight: 800;
+    color: $pb-white;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.2px;
+    background-color: $pb-black;
+    line-height: 1.2;
+
+    &-highlight {
+      color: $pb-red;
+      font-size: 1.25rem;
+      margin-left: 0.25rem;
+      margin-right: 0.25rem;
+    }
   }
 }
 </style>

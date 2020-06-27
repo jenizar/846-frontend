@@ -79,7 +79,7 @@
                 countTweets(activeIncident) + countInstas(activeIncident) > 0
               "
             >
-              <BTab title="Social Media" title-item-class="tab" lazy>
+              <BTab title="Media" title-item-class="tab" lazy>
                 <div v-for="link in activeIncident.links">
                   <div v-if="isTweet(link)" class="container">
                     <Tweet :id="getID(link)" widget-class="tweet" />
@@ -241,7 +241,12 @@ export default {
   }
   .media {
     .active-tab {
-      max-height: 52vh;
+      @media (min-width: 1400px) {
+        max-height: 52vh;
+      }
+      @media (max-width: 1400px) {
+        max-height: 50vh;
+      }
       overflow-y: scroll;
       align-items: center;
       display: flex;
@@ -253,26 +258,63 @@ export default {
       .video-container {
         margin: 4% 4% 4% 4%;
       }
-      .container {
-        margin: 0% 1% 0% 1%;
-        display: flex;
-        flex-direction: column;
-        max-width: 21vw;
-        width: 21vw;
-        overflow: hidden;
-        align-items: center;
-        .tweet {
-          padding: 5px;
-          width: 100%;
-          max-width: 335px;
-          border-radius: 2px;
-        }
-        .insta {
-          padding: 5px;
-          width: 100%;
+      @media (min-width: 1400px) {
+        .container {
+          margin: 0% 1% 0% 1%;
           display: flex;
           flex-direction: column;
+          max-width: 21vw;
+          width: 21vw;
+          overflow: hidden;
           align-items: center;
+          .tweet {
+            padding: 5px;
+            width: 100%;
+            max-width: 335px;
+            border-radius: 2px;
+          }
+          .insta {
+            padding: 5px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+        }
+      }
+      @media (max-width: 1400px) {
+        .container {
+          margin: 0% 1% 0% 1%;
+          display: flex;
+          flex-direction: column;
+          @media (min-width: 480px) {
+            max-width: 95vw;
+            width: 95vw;
+          }
+          @media (max-width: 480px) {
+            max-width: 100vw;
+            width: 100vw;
+          }
+          overflow: hidden;
+          align-items: center;
+          .tweet {
+            padding: 5px;
+            width: 100%;
+            @media (min-width: 480px) {
+              max-width: 335px;
+            }
+            @media (max-width: 480px) {
+              max-width: 200px;
+            }
+            border-radius: 2px;
+          }
+          .insta {
+            padding: 5px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
         }
       }
     }
@@ -323,29 +365,59 @@ export default {
       }
     }
   }
-  .icons {
-    width: calc(28vw - 60px);
-    height: 50px;
-    position: absolute;
-    left: 30px;
-    bottom: 15px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    .btn {
-      margin: 0rem 1.5rem 0rem 1.5rem;
-      padding: 0;
-      display: inline;
-      align-self: center;
-      height: 30px;
-      width: 30px;
+  @media (min-width: 1400px) {
+    .icons {
+      width: calc(28vw - 60px);
+      height: 50px;
+      position: absolute;
+      left: 30px;
+      bottom: 15px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      .btn {
+        margin: 0rem 1.5rem 0rem 1.5rem;
+        padding: 0;
+        display: inline;
+        align-self: center;
+        height: 30px;
+        width: 30px;
+      }
+      .logo {
+        height: 30px;
+        width: 30px;
+        fill: #bbbbbb;
+      }
     }
-    .logo {
-      height: 30px;
-      width: 30px;
-      fill: #bbbbbb;
+  }
+  @media (max-width: 1400px) {
+    .icons {
+      background-color: $pb-gray-900;
+      width: 100%;
+      height: 6vh;
+      position: fixed;
+      top: 94vh;
+      left: 0px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      border-top: 1px #777 solid;
+      .btn {
+        margin: 0rem 1.5rem 0rem 1.5rem;
+        padding: 0;
+        display: inline;
+        align-self: center;
+        height: 30px;
+        width: 30px;
+      }
+      .logo {
+        height: 30px;
+        width: 30px;
+        fill: #bbbbbb;
+      }
     }
   }
 }

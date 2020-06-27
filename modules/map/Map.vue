@@ -143,14 +143,25 @@ export default {
 <style lang="scss">
 .#{$CLASSNAME_PREFIX}-mMap {
   display: flex;
+  background-color: $pb-gray-900;
 
   &-sidebar {
-    flex-basis: 28%;
+    @media (min-width: 1920px) {
+      flex-basis: 28%;
+    }
+    @media (min-width: 1400px) {
+      flex-basis: 33%;
+    }
     height: calc(100vh - #{$header-height});
   }
 
   .GMap {
-    flex-basis: 72%;
+    @media (min-width: 1920px) {
+      flex-basis: 72%;
+    }
+    @media (min-width: 1400px) {
+      flex-basis: 67%;
+    }
     height: calc(100vh - #{$header-height});
 
     &__Wrapper {
@@ -171,6 +182,46 @@ export default {
     height: 40px;
     background: url('../../assets/home.png');
     border: #777;
+  }
+}
+
+@media (max-width: 1400px) {
+  .#{$CLASSNAME_PREFIX}-mMap {
+    .GMap {
+      position: fixed;
+      top: calc(#{$header-height});
+      left: 0;
+      height: calc(40vh - #{$header-height});
+      width: 100%;
+
+      &__Wrapper {
+        width: 100%;
+        height: 100%;
+      }
+
+      &.is-active {
+        transform: scale(2);
+      }
+    }
+
+    &-sidebar {
+      position: fixed;
+      top: calc(40vh);
+      left: 0;
+      height: calc(54vh);
+      width: 100%;
+      overflow-y: scroll;
+    }
+
+    button {
+      position: fixed;
+      top: calc(40vh - 145px);
+      left: calc(100vw - 50px);
+      width: 40px;
+      height: 40px;
+      background: url('../../assets/home.png');
+      border: #777;
+    }
   }
 }
 
