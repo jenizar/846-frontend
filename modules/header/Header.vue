@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style lang="scss">
-@media (min-width: 520px) {
+@media (min-width: 720px) {
   .#{$CLASSNAME_PREFIX}-mHeader {
     display: flex;
     align-items: center;
@@ -53,9 +53,14 @@ export default {
     }
   }
 }
-@media (max-width: 520px) {
+@media (max-width: 720px) {
   .#{$CLASSNAME_PREFIX}-mHeader {
-    margin-top: 5px;
+    @media (max-width: 680px) {
+      margin-top: 5px;
+    }
+    @media (min-width: 680px) {
+      margin-top: 15px;
+    }
     display: block;
     align-items: center;
     justify-content: center;

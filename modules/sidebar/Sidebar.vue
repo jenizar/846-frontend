@@ -367,7 +367,12 @@ export default {
   }
   @media (min-width: 1400px) {
     .icons {
-      width: calc(28vw - 60px);
+      @media (max-width: 1920px) {
+        width: calc(33vw - 60px);
+      }
+      @media (min-width: 1920px) {
+        width: calc(28vw - 60px);
+      }
       height: 50px;
       position: absolute;
       left: 30px;
@@ -396,9 +401,9 @@ export default {
     .icons {
       background-color: $pb-gray-900;
       width: 100%;
-      height: 6vh;
+      height: 8vh;
       position: fixed;
-      top: 94vh;
+      top: 92vh;
       left: 0px;
       display: flex;
       align-items: center;
@@ -407,8 +412,7 @@ export default {
       border-top: 1px #777 solid;
       .btn {
         margin: 0rem 1.5rem 0rem 1.5rem;
-        padding: 0;
-        display: inline;
+        padding: 0.125rem 0 0.125rem 0;
         align-self: center;
         height: 30px;
         width: 30px;

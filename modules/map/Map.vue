@@ -149,7 +149,7 @@ export default {
     @media (min-width: 1920px) {
       flex-basis: 28%;
     }
-    @media (min-width: 1400px) {
+    @media (max-width: 1920px) {
       flex-basis: 33%;
     }
     height: calc(100vh - #{$header-height});
@@ -159,7 +159,7 @@ export default {
     @media (min-width: 1920px) {
       flex-basis: 72%;
     }
-    @media (min-width: 1400px) {
+    @media (max-width: 1920px) {
       flex-basis: 67%;
     }
     height: calc(100vh - #{$header-height});
@@ -191,7 +191,7 @@ export default {
       position: fixed;
       top: calc(#{$header-height});
       left: 0;
-      height: calc(40vh - #{$header-height});
+      height: calc(38vh - #{$header-height});
       width: 100%;
 
       &__Wrapper {
@@ -206,7 +206,7 @@ export default {
 
     &-sidebar {
       position: fixed;
-      top: calc(40vh);
+      top: calc(38vh);
       left: 0;
       height: calc(54vh);
       width: 100%;
@@ -215,7 +215,7 @@ export default {
 
     button {
       position: fixed;
-      top: calc(40vh - 145px);
+      top: calc(38vh - 145px);
       left: calc(100vw - 50px);
       width: 40px;
       height: 40px;
