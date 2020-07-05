@@ -1,0 +1,7 @@
+---
+applications:
+- name: police-brutality
+  path: .
+  random-route: true
+  buildpack: nodejs_buildpack
+  memory: 512M
