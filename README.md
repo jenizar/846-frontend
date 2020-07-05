@@ -44,13 +44,10 @@ Check out the [Nuxt.js docs](https://nuxtjs.org) for additional documentation.
 
 ## Repo info
 new files:
-
 1. file manifest.yml
-
 2. file server.js
 
 Reference:
-
 https://medium.com/netscape/deploying-a-vue-js-2-x-app-to-heroku-in-5-steps-tutorial-a69845ace489
 
 ## Commit message conventions
