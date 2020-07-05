@@ -74,6 +74,7 @@ app.listen(port);
 
 console.log('server started '+ port);
 
+
 save and then type :
 
 $ npm run build
@@ -104,6 +105,7 @@ edit your file package.json on the root director:
     "start": "node server.js",   <--- EDIT THIS LINE HERE 
     
 ...
+
 
 save and then type :
 
