@@ -39,6 +39,8 @@ Check out the [Nuxt.js docs](https://nuxtjs.org) for additional documentation.
 ## Deploy to SAP Cloud Platform (Cloud Foundry)
 create file manifest.yml on the root directory:
 
+//manifest.yml 
+
 ---
 applications:
 
@@ -51,6 +53,7 @@ applications:
   buildpack: nodejs_buildpack
   
   memory: 512M
+
 
 
 add file server.js on the root director:
@@ -78,6 +81,7 @@ console.log('server started '+ port);
 save and then type :
 
 $ npm run build
+
 
 
 edit your file package.json on the root director:
