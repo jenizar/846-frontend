@@ -36,6 +36,55 @@ $ npm run generate
 
 Check out the [Nuxt.js docs](https://nuxtjs.org) for additional documentation.
 
+## Deploy to SAP Cloud Platform (Cloud Foundry)
+create file manifest.yml on the root directory:
+
+---
+applications:
+- name: police-brutality
+  path: .
+  random-route: true
+  buildpack: nodejs_buildpack
+  memory: 512M
+
+add file server.js on the root director:
+
+//server.js
+var express = require('express');
+var path = require('path');
+var serveStatic = require('serve-static');
+app = express();
+app.use(serveStatic(__dirname + "/dist"));
+var port = process.env.PORT || 5000;
+app.listen(port);
+console.log('server started '+ port);
+
+save and then type :
+$ npm run build
+
+edit your file package.json on the root director:
+
+//package.json
+{
+  "name": "846-police-frontend",
+  "version": "0.0.1",
+  "description": "8:46 — Police Brutality",
+  "author": "Manuel Maier",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt --port 3001",
+    "build": "nuxt build",
+    "start": "node server.js",   <--- EDIT THIS LINE HERE 
+...
+
+save and then type :
+$ cf api
+$ cf login
+$ cf push
+
+Reference:
+https://medium.com/netscape/deploying-a-vue-js-2-x-app-to-heroku-in-5-steps-tutorial-a69845ace489
+
 ## Commit message conventions
 ```
 <type>(<scope>): <subject>
