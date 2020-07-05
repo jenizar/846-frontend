@@ -37,6 +37,12 @@ $ npm run generate
 Check out the [Nuxt.js docs](https://nuxtjs.org) for additional documentation.
 
 ## Deploy to SAP Cloud Platform (Cloud Foundry)
+![alt text](https://github.com/jenizar/846-frontend/blob/develop/Screenshot.png)
+
+## Demo
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/r0JtVlxhJsk/0.jpg)](http://www.youtube.com/watch?v=r0JtVlxhJsk)
+
+## Repo info
 new files:
 
 1. file manifest.yml
