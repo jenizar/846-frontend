@@ -41,6 +41,7 @@ create file manifest.yml on the root directory:
 
 ---
 applications:
+
 - name: police-brutality
 
   path: .
@@ -95,6 +96,7 @@ edit your file package.json on the root director:
   "private": true,
   
   "scripts": {
+  
     "dev": "nuxt --port 3001",
     
     "build": "nuxt build",
